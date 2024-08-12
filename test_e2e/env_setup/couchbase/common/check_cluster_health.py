@@ -24,6 +24,7 @@ def check_bucket_health(cluster_config: ClusterConfig, url: str):
             response = requests.get(
                 url, auth=(cluster_config.username, cluster_config.password), verify=False
             )
+            print(response.status_code)
             response_data = response.json()
             if (
                 response.status_code == 200
@@ -38,7 +39,8 @@ def check_bucket_health(cluster_config: ClusterConfig, url: str):
         except Exception as e:
             print(
                 f"Attempt {attempt + 1}/{max_attempts}: "
-                f"Bucket '{cluster_config.bucket_name}' health check failed"
+                f"Bucket '{cluster_config.bucket_name}' health check failed",
+                f"reason: {e}",
             )
             time.sleep(3)
             attempt += 1
