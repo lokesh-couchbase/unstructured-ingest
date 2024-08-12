@@ -2,6 +2,10 @@ name: End-to-End Tests 123
 
 on:
   workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - '**'
 
 jobs:
   setup:
